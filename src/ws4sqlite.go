@@ -154,6 +154,10 @@ func launch(cfg config, disableKeepAlive4Tests bool) {
 		if !database.DisableWALMode {
 			options = append(options, "_pragma=journal_mode(WAL)")
 		}
+
+		options = append(options, "_pragma=busy_timeout(5000)")
+		options = append(options, "_pragma=synchronous(NORMAL)")
+
 		if len(options) > 0 {
 			connString = connString + "?" + strings.Join(options, "&")
 		}
